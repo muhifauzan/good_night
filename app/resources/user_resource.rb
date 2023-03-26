@@ -1,4 +1,6 @@
 class UserResource < JSONAPI::Resource
+  has_many :sleeps
+
   attribute :name
 
   def self.default_sort
