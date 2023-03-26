@@ -1,0 +1,2 @@
+class FolloweeResource < UserResource
+end

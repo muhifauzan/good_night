@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_26_083922) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_26_141700) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -30,5 +30,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_26_083922) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "users_follows", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "followee_id", null: false
+    t.uuid "follower_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followee_id"], name: "index_users_follows_on_followee_id"
+    t.index ["follower_id", "followee_id"], name: "index_users_follows_on_follower_id_and_followee_id", unique: true
+    t.index ["follower_id"], name: "index_users_follows_on_follower_id"
+  end
+
   add_foreign_key "sleeps", "users"
+  add_foreign_key "users_follows", "users", column: "followee_id"
+  add_foreign_key "users_follows", "users", column: "follower_id"
 end

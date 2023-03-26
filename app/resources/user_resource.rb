@@ -1,5 +1,6 @@
 class UserResource < JSONAPI::Resource
   has_many :sleeps
+  has_many :followees
 
   attribute :name
 

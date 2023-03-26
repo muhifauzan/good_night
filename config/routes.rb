@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  jsonapi_resources :users
-  jsonapi_resources :sleeps
+  jsonapi_resources :users do
+    jsonapi_relationships
+  end
+
+  jsonapi_resources :sleeps, except: [:index]
 end
