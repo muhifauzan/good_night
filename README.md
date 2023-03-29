@@ -84,10 +84,9 @@ To unfollow, delete the relationships.
 $ curl -i -H "Accept: application/vnd.api+json" -H 'Content-Type:application/vnd.api+json' -X DELETE -d '{"data": [{"type": "followees", "id": "2"}]}' http://localhost:3000/users/1/relationships/followees
 ```
 
-To see followees' sleep records, you can first retrieve the followees via related link, `/users/:id/followees`. And then retrieve the individual user's sleep records via related link, `/users/:id/sleeps`.
+To see followees' sleep records, you can use path, `/users/:id/followees-sleeps`.
 To filter only the past week, pass `filter[created_since]=last_week` filter. To sort by the sleep duration, pass `sort=duration`. To inverse to order, pass minus sign, `sort=-duration`.
 
 ```shell
-$ curl -i -H "Accept: application/vnd.api+json" -X GET http://localhost:3000/users/1/followees
-$ curl -i -H "Accept: application/vnd.api+json" -X GET http://localhost:3000/users/2/sleeps?filter[created_since]=last_week&sort=-duration
+$ curl -i -H "Accept: application/vnd.api+json" -X GET http://localhost:3000/users/1/followees-sleeps?filter[created_since]=last_week&sort=-duration
 ```

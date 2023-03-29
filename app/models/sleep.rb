@@ -9,6 +9,13 @@ class Sleep < ApplicationRecord
 
   validates :user, presence: true
 
+  scope :of_friend_of_user, ->(user_id) {
+    return unless user_id
+
+    ids = User.find(user_id).followees.pluck(:id)
+    where(user_id: ids)
+  }
+
   private
 
   def maybe_fill_duration

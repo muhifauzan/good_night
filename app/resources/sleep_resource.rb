@@ -4,16 +4,6 @@ class SleepResource < JSONAPI::Resource
   attribute :end_time
   attribute :duration
 
-  filter :created_since, apply: ->(records, value, _options) {
-    case value
-    in ['last_week']
-      now = Time.now.utc
-      records.where(created_at: (now - 1.week)..now)
-    else
-      raise JSONAPI::Exceptions::InvalidFilterValue.new(:created_since, value)
-    end
-  }
-
   def self.default_sort
     [{ field: :created_at, direction: :desc }]
   end
